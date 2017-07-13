@@ -312,6 +312,10 @@ enum Encoding {
   /** Dictionary encoding: the ids are encoded using the RLE encoding
    */
   RLE_DICTIONARY = 8;
+
+  /** Index eocidng
+  */
+  INDEX = 9
 }
 
 /**
@@ -350,7 +354,14 @@ struct DataPageHeader {
 }
 
 struct IndexPageHeader {
-  /** TODO: **/
+  /** Number of values in the index **/
+    1: required i32 num_values;
+
+    /** Encoding using this index page **/
+    2: required Encoding encoding
+
+    /** If true, the entries in the index are sorted in ascending order **/
+    3: optional bool is_sorted;
 }
 
 struct DictionaryPageHeader {
